@@ -15,7 +15,7 @@ CLOCK = pygame.time.Clock()
 #Fons
 fons = pygame.image.load("imatges/fondo2.jpg").convert()
 fons_redi = pygame.transform.scale(fons, (1000,600))
-x = 0
+
 
 #Icona i títol
 pygame.display.set_caption('ZOMBIENEER')
@@ -28,7 +28,7 @@ personatge = Jugador(100,100)
 #Moviment
 def pantalla():
 #Fons en moviment
-
+    x = 0
     x_relativa = x % fons_redi.get_rect().width
     PANTALLA.blit(fons_redi, (x_relativa - fons_redi.get_rect().width, 0))
     if x_relativa < W:
