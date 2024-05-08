@@ -8,7 +8,7 @@ pygame.init()
 #Pantalla
 W,H = 1000,600
 PANTALLA = pygame.display.set_mode((W,H))
-FPS = 100
+FPS = 150
 CLOCK = pygame.time.Clock()
 
 #Fons
