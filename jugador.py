@@ -13,9 +13,11 @@ class Jugador:
     def __init__(self,x,y):
         self.x = x
         self.y = y
-        self.image = pygame.image.load("imatges/icono_personatge.png")
+        imatge = pygame.image.load("imatges/icono_personatge3.png").convert_alpha()
+        self.image = imatge
+        x = 0
         self.salt = False
-        self.vel_salt = 10
+        self.temps_salt = 10
         self.altura_salt = 100
 
     def dibuixa_quiet(self):
@@ -26,7 +28,7 @@ class Jugador:
             self.salt = True
 
     def actualitzar(self):
-        if self.saltant:
+        if self.salt:
             if self.altura_salt >= 0:
                 self.y -= self.vel_salt
                 self.altura_salt -= self.vel_salt
@@ -34,4 +36,4 @@ class Jugador:
                 self.salt = False
                 self.altura_salt = 100
         else:
-            self.y += self.vel_salt
+            self.y += self.temps_salt

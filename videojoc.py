@@ -8,51 +8,38 @@ pygame.init()
 #Pantalla
 W,H = 1000,600
 PANTALLA = pygame.display.set_mode((W,H))
-#Control de FPS
-FPS = 500
+FPS = 100
 CLOCK = pygame.time.Clock()
 
 #Fons
 fons = pygame.image.load("imatges/fondo2.jpg").convert()
-fons_redi = pygame.transform.scale(fons, (1000,600))
+fons_redi = pygame.transform.scale(fons, (W,H))
+x = 0
 
-
-#Icona i títol
+#ICONA I TÍTOL
 pygame.display.set_caption('ZOMBIENEER')
 icona = pygame.image.load("imatges/icono_personatge.png")
 pygame.display.set_icon(icona)
 
-#Personatge
-personatge = Jugador(100,100)
+#Bucle del joc
+while True:
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            pygame.quit()
+            sys.exit()
 
-#Moviment
-def pantalla():
-#Fons en moviment
-    x = 0
     x_relativa = x % fons_redi.get_rect().width
     PANTALLA.blit(fons_redi, (x_relativa - fons_redi.get_rect().width, 0))
     if x_relativa < W:
         PANTALLA.blit(fons_redi,(x_relativa,0))
     x -= 1
 
-#Execució del joc
-executa = True
+    # Personatge
+    personatge = Jugador(50, 360)
+    personatge.dibuixa_quiet()
 
-while executa:
-
-    #Control FPS
+    pygame.display.flip()
     CLOCK.tick(FPS)
 
-    #Bucle del joc
-    for event in pygame.event.get():
-        if event.type == QUIT:
-            executa = False
 
-    #Actualiltzació pantala
-    pygame.display.update()
 
-    #Funció actualitzar pantalla
-    pantalla()
-
-#Exit
-pygame.quit()
