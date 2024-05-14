@@ -17,23 +17,23 @@ class Jugador:
         self.image = imatge
         x = 0
         self.salt = False
-        self.temps_salt = 10
+        self.temps_salt = 0
         self.altura_salt = 100
+        self.vel_salt = 5
 
     def dibuixa_quiet(self):
         PANTALLA.blit(self.image, (self.x,self.y))
 
-    def salta (self):
-        if not self.salt:
-            self.salt = True
-
-    def actualitzar(self):
+    def salta (self, x, y):
+        PANTALLA.blit(self.image, (self.x,self.y))
+        z = 800
         if self.salt:
-            if self.altura_salt >= 0:
-                self.y -= self.vel_salt
-                self.altura_salt -= self.vel_salt
-            else:
-                self.salt = False
-                self.altura_salt = 100
+            z = 360
+            while z < 800:
+                self.y = z
+                z += 1
         else:
-            self.y += self.temps_salt
+            if pygame.key.get_pressed()[pygame.K_SPACE]:
+                self.salt = True
+
+
