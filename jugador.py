@@ -20,17 +20,3 @@ class Jugador:
 
     def dibuixa(self):
         PANTALLA.blit(self.image, (self.x,self.y))
-
-    """def salta (self, x, y):
-        PANTALLA.blit(self.image, (self.x,self.y))
-        z = 800
-        if self.salt:
-            z = 360
-            while z < 800:
-                self.y = z
-                z += 1
-        else:
-            if pygame.key.get_pressed()[pygame.K_SPACE]:
-                self.salt = True"""
-
-

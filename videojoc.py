@@ -28,8 +28,8 @@ posicio_y = 360
 salt = False
 
 gravetat = 1
-altura_salt = 20
-velocitat_y = 10
+altura_salt = 15
+salt_y = altura_salt
 
 #Bucle del joc
 while True:
@@ -54,12 +54,13 @@ while True:
         salt = True
 
     if salt:
-        posicio_y -= velocitat_y
-        velocitat_y -= gravetat
+        posicio_y -= salt_y
+        salt_y -= gravetat
 
-        if velocitat_y < -altura_salt:
+        #Acabament salt
+        if salt_y < -altura_salt:
             salt = False
-            velocitat_y = altura_salt
+            salt_y = altura_salt
         personatge.dibuixa()
 
     else:
