@@ -15,16 +15,13 @@ class Jugador:
         self.y = y
         imatge = pygame.image.load("imatges/icono_personatge3.png").convert_alpha()
         self.image = imatge
-        x = 0
-        self.salt = False
-        self.temps_salt = 0
-        self.altura_salt = 100
-        self.vel_salt = 5
+        self.velocitat = 5
 
-    def dibuixa_quiet(self):
+
+    def dibuixa(self):
         PANTALLA.blit(self.image, (self.x,self.y))
 
-    def salta (self, x, y):
+    """def salta (self, x, y):
         PANTALLA.blit(self.image, (self.x,self.y))
         z = 800
         if self.salt:
@@ -34,6 +31,6 @@ class Jugador:
                 z += 1
         else:
             if pygame.key.get_pressed()[pygame.K_SPACE]:
-                self.salt = True
+                self.salt = True"""
 
 

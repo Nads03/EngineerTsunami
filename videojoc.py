@@ -5,12 +5,6 @@ from jugador import Jugador
 #Iniciació pygame
 pygame.init()
 
-#inicialitzacions
-vel = 0
-salt = 10
-isSalt = False
-y = 360
-
 #Pantalla
 W,H = 1000,600
 PANTALLA = pygame.display.set_mode((W,H))
@@ -20,53 +14,58 @@ CLOCK = pygame.time.Clock()
 #Fons
 fons = pygame.image.load("imatges/fondo2.jpg").convert()
 fons_redi = pygame.transform.scale(fons, (W,H))
-x = 0
+z = 0
 
 #ICONA I TÍTOL
 pygame.display.set_caption('ZOMBIENEER')
 icona = pygame.image.load("imatges/icono_personatge.png")
 pygame.display.set_icon(icona)
 
+#Inicialització personatge
+posicio_x = 50
+posicio_y = 360
+
+salt = False
+
+gravetat = 1
+altura_salt = 20
+velocitat_y = 10
+
 #Bucle del joc
 while True:
-    personatge = Jugador(50, 360)
     for event in pygame.event.get():
 
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
 
-        if event.type == pygame.KEYDOWN:
+    z_relativa = z % fons_redi.get_rect().width
+    PANTALLA.blit(fons_redi, (z_relativa - fons_redi.get_rect().width, 0))
+    if z_relativa < W:
+        PANTALLA.blit(fons_redi,(z_relativa,0))
+    z -= 1
 
-            if event.key == K_SPACE:
-               isSalt = True
+    # Moviment personatge
+    personatge = Jugador(posicio_x, posicio_y)
 
-            if personatge.y != 360:
-                isSalt = False
+    keys_pressed = pygame.key.get_pressed()
 
-            if isSalt:
-                while personatge.y <= 360 and y > 300:
-                    y -= 1
-                    personatge.y = y
-                    print (personatge.y)
-                """if personatge.y == 300:
-                    while personatge.y < 360:
-                        y += 1
-                        personatge.y = y"""
+    if keys_pressed[pygame.K_SPACE]:
+        salt = True
 
+    if salt:
+        posicio_y -= velocitat_y
+        velocitat_y -= gravetat
 
-    personatge.y = y
+        if velocitat_y < -altura_salt:
+            salt = False
+            velocitat_y = altura_salt
+        personatge.dibuixa()
 
-    x_relativa = x % fons_redi.get_rect().width
-    PANTALLA.blit(fons_redi, (x_relativa - fons_redi.get_rect().width, 0))
-    if x_relativa < W:
-        PANTALLA.blit(fons_redi,(x_relativa,0))
-    x -= 1
-
-    # Personatge funcions
-    personatge.dibuixa_quiet()
-    #personatge.salta()
-    #personatge.actualitzar()
+    else:
+        posicio_x = 50
+        posicio_y = 360
+        personatge.dibuixa()
 
     pygame.display.flip()
     CLOCK.tick(FPS)
