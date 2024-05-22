@@ -12,4 +12,8 @@ class Settings():
         # Settings icona i títol
         self.icon = "imatges/icono_personatge.png"
 
+        # Settings personatge
+
+
+
 

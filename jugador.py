@@ -14,41 +14,34 @@ class Jugador(Sprite):
         self.y = y
         imatge = pygame.image.load("imatges/icono_personatge3.png").convert_alpha()
         self.image = imatge
+        self.gravetat = 1
+        self.altura_salt = 15
+        self.salt_y = self.altura_salt
+        self.salt = False
+        #Definim rectangle per la imatge del jugador
+        #self.rect = self.image.get_rect(topleft=(self.x, self.y))
 
     def dibuixa(self):
         PANTALLA.blit(self.image, (self.x,self.y))
 
-#Inicialització personatge
-posicio_x = 50
-posicio_y = 360
+    def space_pressed(self):
+        keys = pygame.key.get_pressed()
+        if keys[K_SPACE] and not self.salt:
+            self.salt = True
 
-salt = False
+    def salta(self):
+        if self.salt:
+            self.y -= self.salt_y
+            self.salt_y -= self.gravetat
 
-gravetat = 1
-altura_salt = 15
-salt_y = altura_salt
+            # Acabament salt
+            if self.salt_y < -self.altura_salt:
+                self.salt = False
+                self.salt_y = self.altura_salt
+            self.dibuixa()
 
-# Moviment personatge
-personatge = Jugador(posicio_x, posicio_y)
-
-# Funció saltar (al model)
-if salt:
-    posicio_y -= salt_y
-    salt_y -= gravetat
-
-    # Acabament salt
-    if salt_y < -altura_salt:
-        salt = False
-        salt_y = altura_salt
-    personatge.dibuixa()
-
-else:
-    posicio_x = 50
-    posicio_y = 360
-    personatge.dibuixa()
-
-
-    def check_which_keydown(keys_pressed):
-        if keys_pressed[pygame.K_SPACE]:
-            salt = True
+        else:
+            self.x = 50
+            self.y = 360
+            self.dibuixa()
 

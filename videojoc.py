@@ -20,9 +20,13 @@ def run_game():
     icona = pygame.image.load(vg_settings.icon)
     pygame.display.set_icon(icona)
 
+    # Ínicialització personatge
+    personatge = Jugador(50,360)
+
+    # Inicialització variable moviment pantalla
     z = 0
 
-    #Bucle del joc
+    # Bucle del joc
     while True:
         for event in pygame.event.get():
 
@@ -30,25 +34,24 @@ def run_game():
                 pygame.quit()
                 sys.exit()
 
-        #Funció moviment pantalla
+        # Funció moviment pantalla
         moviment_pantalla(PANTALLA, fons_redi, vg_settings, z)
         z -= 1
 
-        #Funció detectar tecla (al view)
-        keydown_pressed()
+        #Moviment personatge?
+        personatge.space_pressed()
+
+        #Dibuix personatge si hi ha moviment
+        personatge.salta()
 
         pygame.display.flip()
         CLOCK.tick(vg_settings.fps)
-
 
 def moviment_pantalla(PANTALLA, fons_redi, vg_settings, z):
     z_relativa = z % fons_redi.get_rect().width
     PANTALLA.blit(fons_redi, (z_relativa - fons_redi.get_rect().width, 0))
     if z_relativa < vg_settings.W:
         PANTALLA.blit(fons_redi, (z_relativa, 0))
-
-def keydown_pressed():
-    keys_pressed = pygame.key.get_pressed()
 
 if __name__ == '__main__':
     run_game()
