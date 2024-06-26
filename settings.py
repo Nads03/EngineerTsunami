@@ -1,19 +1,30 @@
+import pygame
+
 class Settings():
-    #Settings per Zombieneer
-
     def __init__(self):
-        """Inicialitzem els ajustaments estàtics del joc."""
-        # Settings pantalla.
-        self.W = 1000
-        self.H = 600
         self.fps = 100
-        self.bg_image = "imatges/fondo2.jpg"
 
-        # Settings icona i títol
-        self.icon = "imatges/icono_personatge.png"
+        self.pant_width = 700
+        self.pant_height = 600
 
-        # Settings personatge
+        # Carreguem imatges
+        self.bg_img = pygame.image.load('imatges/cel.jpg')
+        self.bloc_img = pygame.image.load('imatges/bloc.JPG')
+        self.zombie_img = pygame.image.load('imatges/zombie.png')
 
+        self.t_bloc = 100
+        self.zombie_x = 60
+        self.zombie_y = 75
+
+        self.game_over = False
+
+        self.dades = [
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1]]
 
 
 

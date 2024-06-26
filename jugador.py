@@ -1,47 +1,51 @@
-import pygame, sys
-from pygame.locals import *
-from pygame.sprite import Sprite
+import pygame
 from settings import Settings
+from pygame.sprite import Sprite
 
-#Pantalla
-vg_settings = Settings()
-PANTALLA = pygame.display.set_mode((vg_settings.W, vg_settings.H))
+sett = Settings()
 
-#Classe personatge
 class Jugador(Sprite):
-    def __init__(self,x,y):
-        self.x = x
-        self.y = y
-        imatge = pygame.image.load("imatges/icono_personatge3.png").convert_alpha()
-        self.image = imatge
-        self.gravetat = 1
-        self.altura_salt = 15
-        self.salt_y = self.altura_salt
+    def __init__(self, x, y):
+        super().__init__()
+        self.imatge = pygame.transform.scale(sett.zombie_img, (sett.zombie_x, sett.zombie_y))
+        self.rect = self.imatge.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+        self.width = self.imatge.get_width()
+        self.height = self.imatge.get_height()
+        self.vel = 0
         self.salt = False
-        #Definim rectangle per la imatge del jugador
-        #self.rect = self.image.get_rect(topleft=(self.x, self.y))
 
-    def dibuixa(self):
-        PANTALLA.blit(self.image, (self.x,self.y))
+    def update(self, joc):
+        dx = 0
+        dy = 0
 
-    def space_pressed(self):
-        keys = pygame.key.get_pressed()
-        if keys[K_SPACE] and not self.salt:
+        key = pygame.key.get_pressed()
+        if key[pygame.K_SPACE] and self.salt == False:
+            self.vel = -15
             self.salt = True
 
-    def salta(self):
-        if self.salt:
-            self.y -= self.salt_y
-            self.salt_y -= self.gravetat
+        if key[pygame.K_SPACE] == False:
+            self.salt = False
 
-            # Acabament salt
-            if self.salt_y < -self.altura_salt:
-                self.salt = False
-                self.salt_y = self.altura_salt
-            self.dibuixa()
+        # Gravetat
+        self.vel += 1
+        if self.vel > 10:
+            self.vel = 10
+        dy += self.vel
 
-        else:
-            self.x = 50
-            self.y = 360
-            self.dibuixa()
+        # Colisió
+        for bloc in joc.llista_blocs:
+            if bloc[1].colliderect(self.rect.x + dx, self.rect.y, self.width, self.height):
+                dx = 0
+            if bloc[1].colliderect(self.rect.x, self.rect.y + dy, self.width, self.height):
+                dy = bloc[1].top - self.rect.bottom
+                self.vel = 0
 
+        self.rect.x += dx
+        self.rect.y += dy
+
+        if self.rect.bottom > sett.pant_height:
+            self.rect.bottom = sett.pant_height
+            return True
+        return False
