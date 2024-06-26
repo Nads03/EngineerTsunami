@@ -49,3 +49,5 @@ class Jugador(Sprite):
             self.rect.bottom = sett.pant_height
             return True
         return False
+    def dibuixa(self, pantalla):
+        pantalla.blit(self.imatge, self.rect)
