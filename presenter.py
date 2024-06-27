@@ -4,6 +4,7 @@ import random
 from settings import Settings
 from jugador import Jugador
 from videojoc import Joc
+from boto_restart import Boto
 import view
 
 pygame.init()
@@ -20,6 +21,8 @@ dades = sett.dades
 
 jugador = Jugador(10,sett.pant_height -130)
 joc = Joc(dades)
+
+restart_boto = Boto(sett.pant_width // 2 - 50, sett.pant_height // 2 -25, 'Reinicia')
 
 x = 0
 game_over = sett.game_over
@@ -51,6 +54,16 @@ while run:
 
         puntuacio = font.render(f'Punts: {jugador.punts}', True, (0,0,0))
         pantalla.blit(puntuacio, (10,10))
+
+    else:
+        restart_boto.dibuixa(pantalla)
+        if pygame.mouse.get_pressed()[0]:
+            mouse_pos = pygame.mouse.get_pos()
+            if restart_boto.rect.collidepoint(mouse_pos):
+                jugador = Jugador(10, sett.pant_height - 130)
+                joc = Joc(dades)
+                game_over = False
+                x = 0
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:

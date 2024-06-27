@@ -33,3 +33,8 @@ class Settings():
 
         self.font = pygame.font.SysFont('Arial', 24)
 
+        self.b_color = (0,255,255)
+        self.b_width = 100
+        self.b_height = 50
+        self.b_color_text = (0,0,0)
+
