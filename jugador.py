@@ -15,6 +15,7 @@ class Jugador(Sprite):
         self.height = self.imatge.get_height()
         self.vel = 0
         self.salt = False
+        self.punts = 0
 
     def update(self, joc):
         dx = 0
@@ -44,6 +45,11 @@ class Jugador(Sprite):
 
         self.rect.x += dx
         self.rect.y += dy
+
+        for persona in joc.llista_persones:
+            if self.rect.colliderect(persona.rect):
+                self.punts += 1
+                joc.llista_persones.remove(persona)
 
         if self.rect.bottom > sett.pant_height:
             self.rect.bottom = sett.pant_height

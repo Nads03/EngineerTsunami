@@ -1,5 +1,7 @@
 import pygame
 
+pygame.font.init()
+
 class Settings():
     def __init__(self):
         self.fps = 100
@@ -12,6 +14,7 @@ class Settings():
         self.bloc_img = pygame.image.load('imatges/bloc.JPG')
         self.zombie_img = pygame.image.load('imatges/zombie.png')
         self.bomba_img = pygame.image.load('imatges/bomba.png')
+        self.person_img = pygame.image.load('imatges/enginyer.png')
 
         self.t_bloc = 100
         self.zombie_x = 60
@@ -28,5 +31,5 @@ class Settings():
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1]]
 
-
+        self.font = pygame.font.SysFont('Arial', 24)
 

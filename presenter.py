@@ -4,10 +4,10 @@ import random
 from settings import Settings
 from jugador import Jugador
 from videojoc import Joc
-from obstacle import Bomba
 import view
 
 pygame.init()
+pygame.font.init()
 
 CLOCK = pygame.time.Clock()
 
@@ -23,6 +23,8 @@ joc = Joc(dades)
 
 x = 0
 game_over = sett.game_over
+
+font = sett.font
 
 run = True
 while run:
@@ -41,8 +43,14 @@ while run:
         for bomba in joc.llista_bombes:
             bomba.update(dx_fons)
 
+        for persona in joc.llista_persones:
+            persona.update()
+
         game_over = jugador.update(joc)
         jugador.dibuixa(pantalla)
+
+        puntuacio = font.render(f'Punts: {jugador.punts}', True, (0,0,0))
+        pantalla.blit(puntuacio, (10,10))
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
