@@ -48,6 +48,12 @@ class Jugador(Sprite):
         if self.rect.bottom > sett.pant_height:
             self.rect.bottom = sett.pant_height
             return True
+
+        for bomba in joc.llista_bombes:
+            if bomba.rect.colliderect(self.rect):
+                return True
+
         return False
+
     def dibuixa(self, pantalla):
         pantalla.blit(self.imatge, self.rect)

@@ -4,7 +4,7 @@ import random
 from settings import Settings
 from jugador import Jugador
 from videojoc import Joc
-from obstacle import Obstacle
+from obstacle import Bomba
 import view
 
 pygame.init()
@@ -20,11 +20,9 @@ dades = sett.dades
 
 jugador = Jugador(10,sett.pant_height -130)
 joc = Joc(dades)
-obstacles = pygame.sprite.Group()
 
 x = 0
 game_over = sett.game_over
-obstacle_timer = 0
 
 run = True
 while run:
@@ -40,17 +38,11 @@ while run:
         joc.nova_plataforma()
         joc.dibuixa(pantalla)
 
+        for bomba in joc.llista_bombes:
+            bomba.update(dx_fons)
+
         game_over = jugador.update(joc)
         jugador.dibuixa(pantalla)
-
-        if obstacle_timer == 0:
-            obstacles.add(Obstacle())
-            obstacle_timer = random.randint(150, 300)
-        else:
-            obstacle_timer -= 1
-
-        obstacles.update()
-        obstacles.draw(pantalla)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
