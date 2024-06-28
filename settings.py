@@ -10,6 +10,7 @@ class Settings():
         self.pant_height = 600
 
         # Carreguem imatges
+        self.inici_img = pygame.image.load('imatges/inici.png')
         self.bg_img = pygame.image.load('imatges/cel.jpg')
         self.bloc_img = pygame.image.load('imatges/bloc.JPG')
         self.zombie_img = pygame.image.load('imatges/zombie.png')
@@ -31,10 +32,15 @@ class Settings():
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1]]
 
+        # text
         self.font = pygame.font.SysFont('Arial', 24)
 
-        self.b_color = (0,255,255)
-        self.b_width = 100
+        # botons
+        self.b_color = (255,0,255)
+        self.b_width = 120
         self.b_height = 50
         self.b_color_text = (0,0,0)
+
+        # idiomes
+        self.hor_pos = 50
 

@@ -15,3 +15,7 @@ class Boto():
         text_sup = self.font.render(self.text, True, self.color_text)
         text_rect = text_sup.get_rect(center=self.rect.center)
         pantalla.blit(text_sup, text_rect)
+
+    def premut(self, mouse_pos):
+        return self.rect.collidepoint(mouse_pos)
+
