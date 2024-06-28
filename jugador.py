@@ -51,6 +51,10 @@ class Jugador(Sprite):
                 self.punts += 1
                 joc.llista_persones.remove(persona)
 
+        for objecte_aeri in joc.llista_objectes_aeris:
+            if objecte_aeri.rect.colliderect(self.rect):
+                return True
+
         if self.rect.bottom > sett.pant_height:
             self.rect.bottom = sett.pant_height
             return True

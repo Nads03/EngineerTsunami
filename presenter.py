@@ -118,6 +118,7 @@ while run:
             joc.mou_plataformes(dx_fons)
             joc.nova_plataforma()
             joc.dibuixa(pantalla)
+            joc.update_objectes_aeris()
 
             for bomba in joc.llista_bombes:
                 bomba.update(dx_fons)

@@ -1,5 +1,4 @@
 import pygame
-import random
 from pygame.locals import *
 from settings import Settings
 from pygame.sprite import Sprite

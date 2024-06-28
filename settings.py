@@ -16,6 +16,7 @@ class Settings():
         self.zombie_img = pygame.image.load('imatges/zombie.png')
         self.bomba_img = pygame.image.load('imatges/bomba.png')
         self.person_img = pygame.image.load('imatges/enginyer.png')
+        self.aeri_img = pygame.image.load('imatges/aeri.png')
 
         self.t_bloc = 100
         self.zombie_x = 60
